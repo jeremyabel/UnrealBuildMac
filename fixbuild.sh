@@ -6,7 +6,7 @@ BASE_PATH=/The/Directory/Your/Game/Is/In
 EXE_PATH=$BASE_PATH/$GAME_NAME.app/Contents/MacOS/$GAME_NAME
 APP_PATH=$BASE_PATH/$GAME_NAME.app
 ZIP_PATH=$BASE_PATH/$GAME_NAME.zip
-LOG_PATH=logs
+LOG_PATH=Logs
 
 DEV_CERT="FULL DEV CERT NAME GOES HERE"
 ENTITLEMENT=example.entitlements
@@ -70,8 +70,11 @@ for i in "${bad_fortnite_libs[@]}"; do
 	install_name_tool -delete_rpath /Users/build/Build/++Fortnite/Sync/Engine/Binaries/ThirdParty/PhysX3/Mac $APP_PATH/Contents/UE4/Engine/Binaries/ThirdParty/PhysX3/Mac/$i.dylib
 done
 
+# !!!!!! REMOVE IF YOU DON'T GENERATE DEBUG FILES WHEN PACKAGING !!!!!!
 echo "Moving dSYM..."
 mv $APP_PATH/Contents/UE4/$GAME_NAME/Binaries/Mac/$GAME_NAME-Mac-Shipping.dSYM $BASE_PATH/$GAME_NAME.dSYM
+
+# !!!!!! EVERYTHING BEYOND THIS POINT CAN BE DELETED IF YOU ARE NOT SIGNING YOUR APP BUNDLE !!!!!!
 
 echo "Signing dylibs..."
 
